@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 # Public: A puppet-lint custom check to detect deprecated functions.
 DEPRECATED_FUNCTIONS_VAR_TYPES = Set[:FUNCTION_NAME]
 
 # These functions have been removed in stdlib 9.x.
-REMOVED_FUNCTIONS = [
-  'is_absolute_path', 'type3x', 'private', 'is_bool', 'validate_bool', 
-  'is_string', 'validate_string', 'is_integer', 'validate_integer', 'is_hash', 
-  'is_float', 'validate_hash', 'absolute_path', 'validate_re', 'validate_slength', 
-  'is_ipv6_address', 'validate_ipv6_address', 'is_ipv4_address', 'validate_ipv4_address', 
-  'is_ip_address', 'validate_ip_address', 'size', 'sprintf_hash', 'is_email_address', 
-  'is_mac_address', 'is_domain_name', 'is_function_available'
+REMOVED_FUNCTIONS = %w[
+  is_absolute_path type3x private is_bool validate_bool
+  is_string validate_string is_integer validate_integer is_hash
+  is_float validate_hash absolute_path validate_re validate_slength
+  is_ipv6_address validate_ipv6_address is_ipv4_address validate_ipv4_address
+  is_ip_address validate_ip_address size sprintf_hash is_email_address
+  is_mac_address is_domain_name is_function_available
 ].freeze
 
 # These functions have been namespaced in stdlib 9.x.
-NAMESPACED_FUNCTIONS = [
-  'batch_escape', 'ensure_packages', 'fqdn_rand_string', 'has_interface_with', 'merge', 
-  'os_version_gte', 'parsehocon', 'parsepson', 'powershell_escape', 'seeded_rand', 
-  'seeded_rand_string', 'shell_escape', 'to_json', 'to_json_pretty', 'to_python', 'to_ruby', 
-  'to_toml', 'to_yaml', 'type_of', 'validate_domain_name', 'validate_email_address'
+NAMESPACED_FUNCTIONS = %w[
+  batch_escape ensure_packages fqdn_rand_string has_interface_with merge
+  os_version_gte parsehocon parsepson powershell_escape seeded_rand
+  seeded_rand_string shell_escape to_json to_json_pretty to_python to_ruby
+  to_toml to_yaml type_of validate_domain_name validate_email_address
 ].freeze
 
 PuppetLint.new_check(:stdlib_deprecated_functions) do

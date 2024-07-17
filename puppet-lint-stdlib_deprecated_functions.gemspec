@@ -14,14 +14,15 @@ Gem::Specification.new do |spec|
     'lib/**/*',
     'spec/**/*',
   ]
-  spec.summary       = 'A puppet-lint plugin to detect deprecated, removed and non-namespaced puppetlabs-stdlib functions.'
-  spec.description   = <<-EOF
+  spec.summary       = 'A puppet-lint plugin to aid your puppetlabs-stdlib 9.x upgrade.'
+  spec.description   = <<-DESC
     Helps to detect deprecated, removed and non-namespaced puppetlabs-stdlib functions during your upgrade to puppetlabs-stdlib 9.x,
     and puppet 8.
-  EOF
+  DESC
   spec.homepage      = 'https://github.com/puppetlabs/puppet-lint-stdlib_deprecated_functions'
   spec.license       = 'Apache-2.0'
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.7".freeze)
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.7')
 
   spec.add_runtime_dependency 'puppet-lint', '~> 4.0'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end
