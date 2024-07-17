@@ -1,0 +1,17 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - Gemfile
+    - Rakefile
+    - spec/fixtures/**/*
+    - vendor/bundle/**/*
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: '2.7'
+Lint/OrAssignmentToConstant:
+  Enabled: false
