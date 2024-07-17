@@ -51,6 +51,7 @@ PuppetLint.new_check(:stdlib_deprecated_functions) do
   # only applicable for namespaced functions
   def fix(problem)
     raise PuppetLint::NoFix unless NAMESPACED_FUNCTIONS.include?(problem[:token].value)
+
     problem[:token].value = "stdlib::#{problem[:token].value}"
   end
 end
