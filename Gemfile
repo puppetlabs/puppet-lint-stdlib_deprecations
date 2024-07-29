@@ -11,5 +11,9 @@ group :development do
   gem 'rake', '~> 13.0'
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
-  gem 'rspec', '~> 3.0', require: false
+end
+
+group :development, :test do
+  gem 'rspec', '~> 3.12', require: false
+  gem 'rspec-its', '~> 1.3'
 end
