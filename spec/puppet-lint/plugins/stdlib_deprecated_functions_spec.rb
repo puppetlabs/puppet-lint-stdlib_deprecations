@@ -146,7 +146,7 @@ describe 'stdlib_deprecated_functions' do
       PuppetLint.configuration.fix = false
     end
 
-    context 'with one removed stdlib function present' do
+    context 'with one non-replaceable removed stdlib function present' do
       let(:code) { "is_absolute_path('foo')" }
 
       it 'does detect a problem' do
@@ -255,6 +255,73 @@ describe 'stdlib_deprecated_functions' do
       it 'fixes the code' do
         expect(manifest).to eq(fixedcode)
       end
+    end
+
+    context 'with the replaceable function size() present' do
+      # rubocop: disable Layout/LineLength
+      let(:code) { "size('foo')" }
+
+      it 'does detect a problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'offers an alternative' do
+        expect(problems).to include(a_hash_including(message: "Deprecated function found: 'size'. Use length() instead.", kind: :error))
+      end
+    end
+
+    context 'with the replaceable function hash() present' do
+      let(:code) { "hash('foo')" }
+
+      it 'does detect a problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'offers an alternative' do
+        expect(problems).to include(a_hash_including(message: "Deprecated function found: 'hash'. Use Puppets built-in Hash.new() instead.", kind: :error))
+      end
+    end
+
+    context 'with the replaceable function sprintf_hash() present' do
+      let(:code) { "sprintf_hash('foo')" }
+
+      it 'does detect a problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'offers an alternative' do
+        expect(problems).to include(a_hash_including(message: "Deprecated function found: 'sprintf_hash'. Use sprintf() instead.", kind: :error))
+      end
+    end
+
+    context 'with the replaceable function private() present' do
+      let(:code) { "private('foo')" }
+
+      it 'does detect a problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'offers an alternative' do
+        expect(problems).to include(a_hash_including(message: "Deprecated function found: 'private'. Use assert_private() instead.", kind: :error))
+      end
+    end
+
+    context 'with multiple replaceable functions present' do
+      let(:code) { "size('foo')\nsprintf_hash('foo')\nprivate('foo')" }
+      let(:fixedcode) { "length('foo')\nsprintf('foo')\nassert_private('foo')" }
+
+      it 'does detect multiple problems' do
+        expect(problems.size).to eq(3)
+      end
+
+      it 'offers an alternative for size' do
+        expect(problems).to include(a_hash_including(message: "Deprecated function found: 'size'. Use length() instead.", kind: :error))
+      end
+
+      it 'offers an alternative for private' do
+        expect(problems).to include(a_hash_including(message: "Deprecated function found: 'private'. Use assert_private() instead.", kind: :error))
+      end
+      # rubocop: enable Layout/LineLength
     end
   end
 end

@@ -10,8 +10,17 @@ REMOVED_FUNCTIONS = %w[
   is_float validate_hash absolute_path validate_re validate_slength
   is_ipv6_address validate_ipv6_address is_ipv4_address validate_ipv4_address
   is_ip_address validate_ip_address size sprintf_hash is_email_address
-  is_mac_address is_domain_name is_function_available
+  is_mac_address is_domain_name is_function_available hash has_key is_array
 ].freeze
+
+# Subset of REMOVED_FUNCTIONS that have been replaced with an alternative.
+REPLACED_FUNCTIONS = {
+  'private' => 'assert_private()',
+  'size' => 'length()',
+  'sprintf_hash' => 'sprintf()',
+  'hash' => 'Puppets built-in Hash.new()',
+  'has_key' => 'appropriate Puppet match expressions'
+}.freeze
 
 # These functions have been namespaced in stdlib 9.x.
 NAMESPACED_FUNCTIONS = %w[
@@ -35,7 +44,8 @@ PuppetLint.new_check(:stdlib_deprecated_functions) do
       end
 
       message = "Deprecated function found: '#{token.value}'"
-      message += ". Use 'stdlib::#{token.value}' instead." if namespaced_function_detected
+      message += ". Use stdlib::#{token.value} instead." if namespaced_function_detected
+      message += ". Use #{REPLACED_FUNCTIONS[token.value]} instead." if REPLACED_FUNCTIONS.include?(token.value)
 
       notify_log_level = removed_function_detected ? :error : :warning
       notify notify_log_level, {
