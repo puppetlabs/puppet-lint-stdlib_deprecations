@@ -33,8 +33,6 @@ NAMESPACED_FUNCTIONS = %w[
 PuppetLint.new_check(:stdlib_deprecated_functions) do
   def check
     tokens.select { |x| DEPRECATED_FUNCTIONS_VAR_TYPES.include?(x.type) }.each do |token|
-      next unless token.next_code_token.type == :LPAREN # Skip if it's not a function call
-
       if REMOVED_FUNCTIONS.include?(token.value)
         removed_function_detected = true
       elsif NAMESPACED_FUNCTIONS.include?(token.value)
