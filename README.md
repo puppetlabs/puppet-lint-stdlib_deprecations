@@ -1,2 +1,2 @@
-# puppet-lint-stdlib_deprecated_functions
-A puppet-lint plugin to detect deprecated, removed and non-namespaced puppetlabs-stdlib functions.
+# puppet-lint-stdlib_deprecations
+A puppet-lint plugin to detect puppetlabs-stdlib deprecations including removed and non-namespaced functions and datatypes.
