@@ -64,7 +64,7 @@ Notice, there is no output for the `chomp(..)` function call as there is a direc
 
 * `is_ip_address` is flagged as an error, as this will require manual intervention from the user to update this instance to a suitable replacement.
 * `size` is also flagged as an error was replaced by `length()` which is shipped with Puppet.
-* `batch_escape` omits a warning, this is because the function call will continue to work (until later removed from [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib)), as 'under the hood' the puppet will call the namespaced function.
+* `batch_escape` omits a warning, this is because the function call will continue to work (until later removed from [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib)), as 'under the hood' puppet will call the namespaced function.
 
 For functions which have a namespaced counterpart (like `batch_escape`) we can make use of puppet-lint's autocorrect functionality to automate the process of updating these function calls.
 
@@ -73,7 +73,7 @@ class example_module::agent (
   String $ipaddress = ''
 ) {
 ...
-  $escaped = stdlib::batch_escape('echo "hello world"')
+  $escaped = batch_escape('echo "hello world"')
 }
 ```
 
@@ -83,6 +83,16 @@ puppet-lint --fix path/to/file.pp
 FIXED: Deprecated function found: 'batch_escape'. Use stdlib::batch_escape instead. on line 12 (check: stdlib_deprecated_functions)
 ...
 ```
+
+And the updated code will look like:
+
+```puppet
+class example_module::agent (
+  String $ipaddress = ''
+) {
+...
+  $escaped = stdlib::batch_escape('echo "hello world"')
+}
 
 To disable this check, you can add `--no-stdlib_deprecated_functions-check` to your puppet-lint command line.
 
