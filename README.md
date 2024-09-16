@@ -93,6 +93,7 @@ class example_module::agent (
 ...
   $escaped = stdlib::batch_escape('echo "hello world"')
 }
+```
 
 To disable this check, you can add `--no-stdlib_deprecated_functions-check` to your puppet-lint command line.
 
