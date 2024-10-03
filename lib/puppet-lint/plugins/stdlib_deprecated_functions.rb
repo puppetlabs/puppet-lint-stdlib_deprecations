@@ -19,7 +19,7 @@ REPLACED_FUNCTIONS = {
   'size' => 'length()',
   'sprintf_hash' => 'sprintf()',
   'hash' => 'Puppets built-in Hash.new()',
-  'has_key' => 'appropriate Puppet match expressions'
+  'has_key' => '"if \'key\' in $my_hash"'
 }.freeze
 
 # These functions have been namespaced in stdlib 9.x.
