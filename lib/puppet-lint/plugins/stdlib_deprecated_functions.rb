@@ -3,9 +3,9 @@
 # Public: A puppet-lint custom check to detect deprecated functions.
 DEPRECATED_FUNCTIONS_VAR_TYPES = Set[:FUNCTION_NAME]
 
-# These functions have been removed in stdlib 9.x.
+# These functions have been removed/scheduled for removal in stdlib 9.x.
 REMOVED_FUNCTIONS = %w[
-  is_absolute_path type3x private is_bool validate_bool
+  is_absolute_path type3x private is_bool validate_legacy validate_bool
   is_string validate_string is_integer validate_integer is_hash
   is_float validate_hash absolute_path validate_re validate_slength
   is_ipv6_address validate_ipv6_address is_ipv4_address validate_ipv4_address
@@ -19,7 +19,8 @@ REPLACED_FUNCTIONS = {
   'size' => 'length()',
   'sprintf_hash' => 'sprintf()',
   'hash' => 'Puppets built-in Hash.new()',
-  'has_key' => '"if \'key\' in $my_hash"'
+  'has_key' => '"if \'key\' in $my_hash"',
+  'validate_legacy' => 'Puppet data types to validate parameters'
 }.freeze
 
 # These functions have been namespaced in stdlib 9.x.
