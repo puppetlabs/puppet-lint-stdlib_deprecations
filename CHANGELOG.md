@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v0.0.5](https://github.com/puppetlabs/puppet-lint-stdlib_deprecations/tree/v0.0.5) - 2026-06-03
+
+[Full Changelog](https://github.com/puppetlabs/puppet-lint-stdlib_deprecations/compare/v0.0.4...v0.0.5)
+
+### Fixed
+
+- puppet-lint: Allow 5.x [#19](https://github.com/puppetlabs/puppet-lint-stdlib_deprecations/pull/19) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v0.0.4](https://github.com/puppetlabs/puppet-lint-stdlib_deprecations/tree/v0.0.4) - 2026-03-18
 
 [Full Changelog](https://github.com/puppetlabs/puppet-lint-stdlib_deprecations/compare/v0.0.3...v0.0.4)
